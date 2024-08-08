@@ -9,6 +9,8 @@ import com.android.searchproject.MainActivity
 import com.android.searchproject.data.MainActivityItem
 import com.android.searchproject.databinding.ItemRecyclerviewLockerBinding
 import com.bumptech.glide.Glide
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class LockerAdapter(val mItems: MutableList<MainActivityItem>, val context: Context): RecyclerView.Adapter<LockerAdapter.Holder>() {
 
@@ -30,7 +32,10 @@ class LockerAdapter(val mItems: MutableList<MainActivityItem>, val context: Cont
         val main = (context as MainActivity).fragment
         Glide.with(holder.imageView.context).load(main.get(position).thumbnail_url).into(holder.imageView)
         holder.site.text = main.get(position).display_sitename
-        holder.date.text = main.get(position).datetime
+        val date = main.get(position).datetime
+        val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+        val oldFormat = ZonedDateTime.parse(date, formatter)
+        holder.date.text = oldFormat.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 
         holder.imageView.setOnClickListener {  //클릭이벤트추가부분
             itemClick?.onClick(it, position)

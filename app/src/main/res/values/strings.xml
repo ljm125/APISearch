@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SearchProject</string>
     <string name="image_search">이미지 검색</string>
+    <string name="edit_search">검색어를 입력하세요.</string>
     <string name="search">검색</string>
     <string name="my_locker">내 보관함</string>
 </resources>

@@ -9,6 +9,7 @@ import java.util.Date
 import java.util.concurrent.TimeUnit
 
 object NetWorkClient {
+    //기본 주소
     private const val SEARCH_BASE_URL = "https://dapi.kakao.com/"
 
     private fun createOkHttpClient() : OkHttpClient {
