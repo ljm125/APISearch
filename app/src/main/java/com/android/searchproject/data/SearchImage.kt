@@ -39,3 +39,9 @@ data class DocumentsItem(
     @SerializedName("width")
     val width: Int?
 )
+
+data class MainActivityItem(
+    val thumbnail_url: String?,
+    val display_sitename: String?,
+    val datetime : String?
+    )
