@@ -1,13 +1,9 @@
 package com.android.searchproject.Adapter
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -15,16 +11,9 @@ import com.android.searchproject.MainActivity
 import com.android.searchproject.data.DocumentsItem
 import com.android.searchproject.databinding.ItemRecyclerviewSearchBinding
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Date
 
-//context도 SearchAdapter 파라미터에 추가
-//이를 통하여 mainActivity에 있는 함수를 호출 가능해짐
-//mainAcitvity에 addLike, remoteLike 라는 함수를 생성하여 Like가 눌리면 추가되고 없어지면 제거 되도록..
-//mainActivity에서 arrayList를 작성, 이 arrayList를 보관함 Adapter에 넘겨줘야 함
 class SearchAdapter(val mItems: MutableList<DocumentsItem>, val context: Context) :
     RecyclerView.Adapter<SearchAdapter.Holder>() {
 

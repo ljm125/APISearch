@@ -1,31 +1,28 @@
 package com.android.searchproject.data
 
 import com.google.gson.annotations.SerializedName
-import java.time.DateTimeException
-
-//data class SearchImage(val response : SearchResponse)
 
 data class SearchResponse(
     @SerializedName("meta")
-    val searchMeta : SearchMeta?,
+    val searchMeta: SearchMeta?,
     @SerializedName("documents")
-    val searchDocuments : MutableList<DocumentsItem>?
+    val searchDocuments: MutableList<DocumentsItem>?
 )
 
 data class SearchMeta(
     @SerializedName("total_count")
-    val total_count : Int?,
+    val total_count: Int?,
     @SerializedName("pageable_count")
-    val pageable_count : Int?,
+    val pageable_count: Int?,
     @SerializedName("is_end")
-    val is_end : Boolean?
+    val is_end: Boolean?
 )
 
 data class DocumentsItem(
     @SerializedName("collection")
-    val collection : String?,
+    val collection: String?,
     @SerializedName("datetime")
-    val datetime : String?,
+    val datetime: String?,
     @SerializedName("display_sitename")
     val display_sitename: String?,
     @SerializedName("doc_url")
@@ -43,5 +40,5 @@ data class DocumentsItem(
 data class MainActivityItem(
     val thumbnail_url: String?,
     val display_sitename: String?,
-    val datetime : String?
-    )
+    val datetime: String?
+)

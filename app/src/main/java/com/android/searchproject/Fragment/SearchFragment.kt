@@ -1,7 +1,6 @@
 package com.android.searchproject.Fragment
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContentProviderCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.searchproject.Adapter.SearchAdapter
@@ -48,14 +46,14 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = SearchAdapter(items,requireContext())
+        adapter = SearchAdapter(items, requireContext())
         binding.apply {
             rvSearch.adapter = adapter
-            rvSearch.layoutManager = GridLayoutManager(context,2)
-            }
-        Log.d("onViewCreated","Created test")
+            rvSearch.layoutManager = GridLayoutManager(context, 2)
+        }
+        Log.d("onViewCreated", "Created test")
         binding.btnSearch.setOnClickListener {
-            Log.d("onViewCreated","click")
+            Log.d("onViewCreated", "click")
             val key = binding.etSearch.text.toString()
             saveSearchData()
             commuicateNetWork(key)
@@ -64,25 +62,25 @@ class SearchFragment : Fragment() {
         loadSearchData()
     }
 
-    fun saveSearchData(){
-        val save = requireContext().getSharedPreferences("save",0)
+    fun saveSearchData() {
+        val save = requireContext().getSharedPreferences("save", 0)
         val edit = save.edit()
-        edit.putString("search",binding.etSearch.text.toString())
+        edit.putString("search", binding.etSearch.text.toString())
         edit.apply()
     }
 
-    fun loadSearchData(){
-        val load = requireContext().getSharedPreferences("save",0)
-        binding.etSearch.setText(load.getString("search",""))
+    fun loadSearchData() {
+        val load = requireContext().getSharedPreferences("save", 0)
+        binding.etSearch.setText(load.getString("search", ""))
     }
 
-    private fun commuicateNetWork(key:String) = lifecycleScope.launch() {
+    private fun commuicateNetWork(key: String) = lifecycleScope.launch() {
         val authHeader = "KakaoAK f0ec90fdd19fc6925133ccfdcd8f85df"
         val sort = "accuracy"
         val page = 1
         val size = 80
         items.clear()
-        val responseData = NetWorkClient.searchNetWork.getSearch(authHeader,key,sort,page,size)
+        val responseData = NetWorkClient.searchNetWork.getSearch(authHeader, key, sort, page, size)
         responseData.searchDocuments?.let { items.addAll(it) }
         adapter.notifyDataSetChanged()
     }

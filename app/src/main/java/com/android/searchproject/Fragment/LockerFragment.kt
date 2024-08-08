@@ -25,6 +25,7 @@ class LockerFragment : Fragment() {
         super.onAttach(context)
         mContext = context
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -38,17 +39,16 @@ class LockerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-//        val mainActivity = activity as MainActivity
-//        mainActivity.fragment
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mainActivity = activity as MainActivity
-        adapter = LockerAdapter(mainActivity.fragment,requireContext())
+        adapter = LockerAdapter(mainActivity.fragment, requireContext())
         binding.apply {
             rvLocker.adapter = adapter
-            rvLocker.layoutManager = GridLayoutManager(context,2)
+            rvLocker.layoutManager = GridLayoutManager(context, 2)
         }
         adapter.notifyDataSetChanged()
     }

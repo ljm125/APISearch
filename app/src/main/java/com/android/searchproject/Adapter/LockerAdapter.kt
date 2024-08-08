@@ -12,25 +12,31 @@ import com.bumptech.glide.Glide
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-class LockerAdapter(val mItems: MutableList<MainActivityItem>, val context: Context): RecyclerView.Adapter<LockerAdapter.Holder>() {
+class LockerAdapter(val mItems: MutableList<MainActivityItem>, val context: Context) :
+    RecyclerView.Adapter<LockerAdapter.Holder>() {
 
     //ItemClick은 imageView 클릭 시 하트 생성할 때 사용
     interface ItemClick {
-        fun onClick(view : View, position : Int)
+        fun onClick(view: View, position: Int)
     }
 
-    var itemClick : ItemClick? = null
+    var itemClick: ItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         //item_recyclerview_locker.xml을 바인딩, Holder 객체 생성
-        val binding = ItemRecyclerviewLockerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemRecyclerviewLockerBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         val main = (context as MainActivity).fragment
-        Glide.with(holder.imageView.context).load(main.get(position).thumbnail_url).into(holder.imageView)
+        Glide.with(holder.imageView.context).load(main.get(position).thumbnail_url)
+            .into(holder.imageView)
         holder.site.text = main.get(position).display_sitename
         val date = main.get(position).datetime
         val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
@@ -43,7 +49,8 @@ class LockerAdapter(val mItems: MutableList<MainActivityItem>, val context: Cont
             (context as MainActivity).deleteLikeItem(
                 mItems[position].thumbnail_url.toString(),
                 mItems[position].display_sitename.toString(),
-                mItems[position].datetime.toString())
+                mItems[position].datetime.toString()
+            )
         }
 
 
@@ -57,7 +64,8 @@ class LockerAdapter(val mItems: MutableList<MainActivityItem>, val context: Cont
         return mItems.size
     }
 
-    inner class Holder(val binding: ItemRecyclerviewLockerBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(val binding: ItemRecyclerviewLockerBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         //Holder 생성, 변수 imageView, site, date에 각각 imageView, textView, textView로 초기화
         val imageView = binding.ivLocker
         val site = binding.tvSiteLocker
